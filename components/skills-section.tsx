@@ -4,38 +4,50 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { Badge } from "@/components/ui/badge"
-import { Cpu, CircuitBoard, Layers, Code, Wrench } from "lucide-react"
+import { Cpu, CircuitBoard, Layers, Code, Wrench, Zap } from "lucide-react"
 
 const skillCategories = [
   {
     title: "Embedded Systems",
     icon: Cpu,
     color: "primary",
-    skills: ["STM32", "AVR", "Embedded C", "C++", "SPI", "I2C", "UART"],
+    skills: ["STM32", "ESP32", "AVR", "Embedded C", "C++", "UART", "SPI", "I2C", "CAN", "CMake"],
   },
   {
     title: "Hardware",
     icon: CircuitBoard,
     color: "accent",
-    skills: ["PCB Design", "Altium Designer", "Signal Integrity", "EMI/EMC"],
+    skills: ["PCB Design", "Altium Designer", "Signal Integrity", "EMI/EMC", "Hardware Validation"],
   },
   {
     title: "FPGA",
     icon: Layers,
     color: "primary",
-    skills: ["VHDL", "Verilog", "KRIA KV260"],
+    skills: ["Verilog", "Quartus", "DE10-Nano", "KRIA KV260"],
   },
   {
-    title: "Software",
+    title: "Embedded AI",
+    icon: Zap,
+    color: "accent",
+    skills: ["TinyML", "TensorFlow Lite", "Model Quantization", "Edge AI"],
+  },
+  {
+    title: "Robotics & Control",
+    icon: Code,
+    color: "primary",
+    skills: ["Control Systems", "Embedded Sensing", "Motor Control", "Sensor Fusion"],
+  },
+  {
+    title: "Software & Tools",
     icon: Code,
     color: "accent",
     skills: ["Python", "MATLAB", "Git"],
   },
   {
-    title: "Tools",
+    title: "Test & Design Tools",
     icon: Wrench,
     color: "primary",
-    skills: ["LTspice", "Proteus", "Microchip Studio", "TINA-TI", "Oscilloscope", "Logic Analyzer"],
+    skills: ["Oscilloscope", "Logic Analyzer", "LTspice", "Proteus", "Microchip Studio", "TINA-TI"],
   },
 ]
 
