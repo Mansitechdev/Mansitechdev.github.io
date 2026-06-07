@@ -99,7 +99,7 @@ export function HeroSection() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                 </span>
-                <span className="text-foreground">Open to Internships, Thesis Projects & Graduate Roles</span>
+                <span className="text-foreground">Open to Student Roles, Internships & Thesis Projects </span>
               </motion.div>
 
               <motion.p
@@ -158,7 +158,7 @@ export function HeroSection() {
                 MSc Embedded Systems student at the University of Twente with 2+ years of industry experience in embedded hardware, firmware development, PCB design, robotics platforms, and FPGA-based systems.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-                Passionate about embedded systems, robotics, FPGA acceleration, embedded AI, and building reliable hardware-software systems that operate in real-world environments.
+                Interested in embedded systems, robotics, FPGA acceleration, and embedded AI, with a focus on designing reliable hardware-software systems that operate under real-world constraints. Currently open to student roles, internships, thesis projects, and graduate opportunities.
               </p>
             </motion.div>
 
