@@ -11,7 +11,7 @@ const stats = [
     label: "Years Industry Experience",
   },
   {
-    icon: Code2,
+    icon: Code2, 
     value: "10+",
     label: "Embedded Projects",
   },
