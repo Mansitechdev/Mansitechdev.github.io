@@ -18,14 +18,14 @@ const education = [
     institution: "Vellore Institute of Technology",
     degree: "Bachelor of Technology",
     field: "Electronics and Communication Engineering",
-    location: "India",
+    location: "Chennai, India",
     current: false,
   },
 ]
 
 const languages = [
   { name: "English", level: "Fluent" },
-  { name: "Dutch", level: "A1, Learning" },
+  { name: "Dutch", level: "A1, Currently learning" },
 ]
 
 export function EducationSection() {
