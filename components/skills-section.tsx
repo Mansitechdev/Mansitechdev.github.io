@@ -11,19 +11,19 @@ const skillCategories = [
     title: "Embedded Systems",
     icon: Cpu,
     color: "primary",
-    skills: ["STM32", "ESP32", "AVR", "Embedded C", "C++", "UART", "SPI", "I2C", "CAN", "CMake"],
+    skills: ["STM32", "ESP32", "AVR", "Embedded C", "C++", "UART", "SPI", "I2C", "CAN"],
   },
   {
     title: "Hardware",
     icon: CircuitBoard,
     color: "accent",
-    skills: ["PCB Design", "Altium Designer", "Signal Integrity", "EMI/EMC", "Hardware Validation"],
+    skills: ["PCB Design", "Altium Designer", "Board Bring-up", "Signal Integrity", "EMI/EMC", "Hardware Validation"],
   },
   {
     title: "FPGA",
     icon: Layers,
     color: "primary",
-    skills: ["Verilog", "Quartus", "DE10-Nano", "KRIA KV260"],
+    skills: ["Verilog", "Intel Quartus", "DE10-Nano", "KRIA KV260"],
   },
   {
     title: "Embedded AI",
@@ -38,10 +38,10 @@ const skillCategories = [
     skills: ["Control Systems", "Embedded Sensing", "Motor Control", "Sensor Fusion"],
   },
   {
-    title: "Software & Tools",
+    title: "Programming & Tools",
     icon: Code,
     color: "accent",
-    skills: ["Python", "MATLAB", "Git"],
+    skills: ["Python", "MATLAB", "Git", "CMake"],
   },
   {
     title: "Test & Design Tools",
@@ -59,7 +59,7 @@ export function SkillsSection() {
     <section id="skills" className="py-32 relative overflow-hidden">
       <div className="absolute inset-0 circuit-bg" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-      
+
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           ref={ref}
@@ -85,7 +85,7 @@ export function SkillsSection() {
               className="group relative p-6 rounded-xl bg-card border border-border/50 hover:border-primary/50 transition-all"
             >
               <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              
+
               <div className="relative space-y-4">
                 <div className="flex items-center gap-3">
                   <div className={`p-2 rounded-lg ${category.color === "primary" ? "bg-primary/10" : "bg-accent/10"}`}>
@@ -95,7 +95,7 @@ export function SkillsSection() {
                     {category.title}
                   </h3>
                 </div>
-                
+
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
