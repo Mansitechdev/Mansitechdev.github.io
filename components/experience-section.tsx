@@ -20,7 +20,7 @@ const experiences = [
       "Performed circuit design, PCB design, board bring-up, validation, debugging, and hardware troubleshooting.",
       "Conducted circuit simulation, thermal analysis, signal integrity reviews, and EMI/EMC reliability testing.",
       "Executed hardware validation using oscilloscopes, LCR meters, multimeters, and embedded debugging tools.",
-      "Prepared BOMs and technical documentation supporting hardware assembly, testing, and system integration.",
+      "Prepared BOMs and technical documentation to support hardware assembly, testing, and system integration.",
     ],
     featured: true,
   },
@@ -32,7 +32,7 @@ const experiences = [
     tags: ["High-speed PCB design", "Altium Designer", "Board bring-up", "Signal integrity"],
     highlights: [
       "Designed embedded schematics and PCB layouts in Altium Designer.",
-      "Supported high-speed PCB design, component selection, and layout review activities.",
+      "Supported high-speed PCB design, component selection, and layout optimization for signal integrity.",
       "Conducted prototype board bring-up, debugging, and functional validation.",
       "Performed signal integrity reviews and supported reliability improvements.",
       "Collaborated with firmware and hardware teams to validate embedded system designs.",
@@ -48,7 +48,7 @@ const experiences = [
     highlights: [
       "Analyzed detailed business proposals covering 14 project requirements and presented 5 implementation options for stakeholder evaluation.",
       "Supported technical requirement analysis and project planning activities.",
-      "Contributed to proposal documentation used to pursue new project contracts over a 3-month period.",
+      "Contributed to proposal documentation used to pursue new project opportunities and client engagements.",
       "Collaborated with stakeholders to evaluate technical feasibility and project scope.",
     ],
     featured: true,
@@ -88,8 +88,8 @@ export function ExperienceSection() {
         >
           <p className="text-primary font-mono text-sm tracking-wider uppercase">Experience</p>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Professional{" "}
-            <span className="gradient-text">Journey</span>
+            Industry{" "}
+            <span className="gradient-text">Experience</span>
           </h2>
         </motion.div>
 
