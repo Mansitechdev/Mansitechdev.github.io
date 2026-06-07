@@ -27,6 +27,8 @@ const stats = [
   },
 ]
 
+const focusAreas = ["Embedded Systems", "FPGA", "Robotics", "Embedded AI"]
+
 export function HeroSection() {
   const handleScrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -106,7 +108,7 @@ export function HeroSection() {
                 transition={{ delay: 0.2 }}
                 className="text-muted-foreground font-mono text-xs tracking-widest uppercase"
               >
-                Embedded Systems Engineer
+                MSc Embedded Systems Student | Embedded Systems Engineer
               </motion.p>
 
               <motion.h1
@@ -128,6 +130,22 @@ export function HeroSection() {
               >
                 Building reliable embedded systems where hardware meets intelligence.
               </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45 }}
+                className="flex flex-wrap gap-2 pt-1"
+              >
+                {focusAreas.map((area) => (
+                  <span
+                    key={area}
+                    className="px-3 py-1 rounded-full border border-primary/30 bg-card/60 text-sm text-muted-foreground"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </motion.div>
             </div>
 
             <motion.div
@@ -137,10 +155,10 @@ export function HeroSection() {
               className="space-y-4"
             >
               <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-                MSc Embedded Systems student at the University of Twente with 2+ years of industry experience in embedded hardware, firmware development, PCB design, FPGA systems, and robotics platforms.
+                MSc Embedded Systems student at the University of Twente with 2+ years of industry experience in embedded hardware, firmware development, PCB design, robotics platforms, and FPGA-based systems.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-                Interested in embedded systems, FPGA acceleration, embedded AI, robotics, and hardware-software co-design.
+                Passionate about embedded systems, robotics, FPGA acceleration, embedded AI, and building reliable hardware-software systems that operate in real-world environments.
               </p>
             </motion.div>
 
@@ -176,7 +194,7 @@ export function HeroSection() {
             className="relative flex justify-center lg:justify-end"
           >
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/8 to-accent/12 blur-2xl scale-110" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-500/10 blur-3xl scale-110" />
 
               <svg className="absolute -inset-6 w-[calc(100%+48px)] h-[calc(100%+48px)]" viewBox="0 0 400 400">
                 <motion.circle cx="200" cy="200" r="180" fill="none" stroke="#14B8A6" strokeWidth="1.5" strokeDasharray="20 10" opacity="0.5" initial={{ rotate: 0 }} animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} />
