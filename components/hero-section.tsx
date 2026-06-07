@@ -158,7 +158,7 @@ export function HeroSection() {
                 MSc Embedded Systems student at the University of Twente with 2+ years of industry experience in embedded hardware, firmware development, PCB design, robotics platforms, and FPGA-based systems.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-                Interested in embedded systems, robotics, FPGA acceleration, and embedded AI, with a focus on designing reliable hardware-software systems that operate under real-world constraints. Currently open to student roles, internships, thesis projects, and graduate opportunities.
+                Interested in embedded systems, robotics, FPGA acceleration, and embedded AI, with a focus on building reliable hardware-software systems that operate under real-world constraints. Currently open to student roles, internships, and thesis projects.
               </p>
             </motion.div>
 
