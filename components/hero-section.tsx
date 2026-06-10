@@ -11,14 +11,14 @@ const stats = [
     label: "Years Industry Experience",
   },
   {
-    icon: Code2, 
+    icon: Code2,
     value: "10+",
     label: "Embedded Projects",
   },
   {
     icon: Cpu,
     value: "FPGA",
-    label: "& Hardware Design",
+    label: "& Embedded Systems",
   },
   {
     icon: Zap,
@@ -26,8 +26,6 @@ const stats = [
     label: "& Robotics",
   },
 ]
-
-const focusAreas = ["Embedded Systems", "FPGA", "Robotics", "Embedded AI"]
 
 export function HeroSection() {
   const handleScrollToSection = (sectionId: string) => {
@@ -42,6 +40,7 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden circuit-bg">
+      {/* Animated circuit lines background - subtle */}
       <div className="absolute inset-0 overflow-hidden opacity-20">
         <svg className="absolute w-full h-full opacity-15" viewBox="0 0 1000 1000">
           <defs>
@@ -50,18 +49,75 @@ export function HeroSection() {
               <stop offset="100%" stopColor="#A63A5B" />
             </linearGradient>
           </defs>
-
-          <motion.path d="M0,200 H300 L350,250 H600 L650,200 H1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, ease: "easeInOut" }} />
-          <motion.path d="M0,400 H200 L250,350 H450 L500,400 H700 L750,450 H1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 0.5, ease: "easeInOut" }} />
-          <motion.path d="M0,600 H150 L200,650 H400 L450,600 H650 L700,550 H1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 1, ease: "easeInOut" }} />
-          <motion.path d="M0,800 H400 L450,750 H550 L600,800 H1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 1.5, ease: "easeInOut" }} />
-          <motion.path d="M200,0 V300 L250,350 V700 L200,750 V1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 0.3, ease: "easeInOut" }} />
-          <motion.path d="M500,0 V200 L550,250 V500 L500,550 V1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 0.8, ease: "easeInOut" }} />
-          <motion.path d="M800,0 V400 L750,450 V600 L800,650 V1000" stroke="url(#circuit-gradient)" strokeWidth="1" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 3, delay: 1.3, ease: "easeInOut" }} />
-
+          {/* Horizontal lines */}
+          <motion.path
+            d="M0,200 H300 L350,250 H600 L650,200 H1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M0,400 H200 L250,350 H450 L500,400 H700 L750,450 H1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 0.5, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M0,600 H150 L200,650 H400 L450,600 H650 L700,550 H1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 1, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M0,800 H400 L450,750 H550 L600,800 H1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 1.5, ease: "easeInOut" }}
+          />
+          {/* Vertical lines */}
+          <motion.path
+            d="M200,0 V300 L250,350 V700 L200,750 V1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 0.3, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M500,0 V200 L550,250 V500 L500,550 V1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 0.8, ease: "easeInOut" }}
+          />
+          <motion.path
+            d="M800,0 V400 L750,450 V600 L800,650 V1000"
+            stroke="url(#circuit-gradient)"
+            strokeWidth="1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 1.3, ease: "easeInOut" }}
+          />
+          {/* Circuit nodes */}
           {[
             [200, 200], [350, 250], [500, 400], [650, 200], [750, 450],
-            [200, 350], [450, 350], [700, 550], [200, 750], [600, 800],
+            [200, 350], [450, 350], [700, 550], [200, 750], [600, 800]
           ].map(([cx, cy], i) => (
             <motion.circle
               key={i}
@@ -77,11 +133,13 @@ export function HeroSection() {
         </svg>
       </div>
 
+      {/* Gradient orbs - reduced intensity */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/4 rounded-full blur-3xl animate-pulse-glow" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/4 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left column - Text content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -89,6 +147,7 @@ export function HeroSection() {
             className="space-y-8"
           >
             <div className="space-y-4">
+              {/* Availability Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -99,7 +158,7 @@ export function HeroSection() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                 </span>
-                <span className="text-foreground">Open to Student Roles, Internships & Thesis Projects </span>
+                <span className="text-foreground">Open to Internships, Thesis Projects & Graduate Roles</span>
               </motion.div>
 
               <motion.p
@@ -108,9 +167,9 @@ export function HeroSection() {
                 transition={{ delay: 0.2 }}
                 className="text-muted-foreground font-mono text-xs tracking-widest uppercase"
               >
-                MSc Embedded Systems Student | Embedded Systems Engineer
+                Embedded Systems Engineer
               </motion.p>
-
+              
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -121,7 +180,7 @@ export function HeroSection() {
                 <br />
                 <span className="gradient-text">Bhardwaj</span>
               </motion.h1>
-
+              
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -130,22 +189,6 @@ export function HeroSection() {
               >
                 Building reliable embedded systems where hardware meets intelligence.
               </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.45 }}
-                className="flex flex-wrap gap-2 pt-1"
-              >
-                {focusAreas.map((area) => (
-                  <span
-                    key={area}
-                    className="px-3 py-1 rounded-full border border-primary/30 bg-card/60 text-sm text-muted-foreground"
-                  >
-                    {area}
-                  </span>
-                ))}
-              </motion.div>
             </div>
 
             <motion.div
@@ -155,10 +198,10 @@ export function HeroSection() {
               className="space-y-4"
             >
               <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-                MSc Embedded Systems student at the University of Twente with 2+ years of industry experience in embedded hardware, firmware development, PCB design, robotics platforms, and FPGA-based systems.
+                MSc Embedded Systems student at the University of Twente with 2+ years of industry experience in embedded hardware, firmware development, PCB design, FPGA systems, and robotics platforms.
               </p>
               <p className="text-muted-foreground text-base leading-relaxed max-w-xl">
-                Interested in embedded systems, robotics, FPGA acceleration, and embedded AI, with a focus on building reliable hardware-software systems that operate under real-world constraints. Currently open to student roles, internships, and thesis projects.
+                Interested in embedded systems, FPGA acceleration, embedded AI, robotics, and hardware-software co-design.
               </p>
             </motion.div>
 
@@ -180,13 +223,19 @@ export function HeroSection() {
                   LinkedIn
                 </a>
               </Button>
-              <Button size="lg" variant="ghost" className="gap-2" onClick={() => handleScrollToSection("contact")}>
+              <Button 
+                size="lg" 
+                variant="ghost" 
+                className="gap-2"
+                onClick={() => handleScrollToSection("contact")}
+              >
                 <Mail className="w-4 h-4" />
                 Contact Me
               </Button>
             </motion.div>
           </motion.div>
 
+          {/* Right column - Avatar/Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -194,13 +243,40 @@ export function HeroSection() {
             className="relative flex justify-center lg:justify-end"
           >
             <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/10 via-transparent to-fuchsia-500/10 blur-3xl scale-110" />
-
+              {/* Outer glow ring - reduced intensity */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/8 to-accent/12 blur-2xl scale-110" />
+              
+              {/* Decorative ring - teal primary, burgundy secondary */}
               <svg className="absolute -inset-6 w-[calc(100%+48px)] h-[calc(100%+48px)]" viewBox="0 0 400 400">
-                <motion.circle cx="200" cy="200" r="180" fill="none" stroke="#14B8A6" strokeWidth="1.5" strokeDasharray="20 10" opacity="0.5" initial={{ rotate: 0 }} animate={{ rotate: 360 }} transition={{ duration: 60, repeat: Infinity, ease: "linear" }} />
-                <motion.circle cx="200" cy="200" r="160" fill="none" stroke="#A63A5B" strokeWidth="1" strokeDasharray="10 20" opacity="0.3" initial={{ rotate: 360 }} animate={{ rotate: 0 }} transition={{ duration: 45, repeat: Infinity, ease: "linear" }} />
+                <motion.circle
+                  cx="200"
+                  cy="200"
+                  r="180"
+                  fill="none"
+                  stroke="#14B8A6"
+                  strokeWidth="1.5"
+                  strokeDasharray="20 10"
+                  opacity="0.5"
+                  initial={{ rotate: 0 }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                />
+                <motion.circle
+                  cx="200"
+                  cy="200"
+                  r="160"
+                  fill="none"
+                  stroke="#A63A5B"
+                  strokeWidth="1"
+                  strokeDasharray="10 20"
+                  opacity="0.3"
+                  initial={{ rotate: 360 }}
+                  animate={{ rotate: 0 }}
+                  transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
+                />
               </svg>
 
+              {/* Avatar container - subtle burgundy ring */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-accent/30 glow-accent">
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Mansi%20Bhardwaj-AGfOnKZymYWmmvZfKQMjDaSQPfpxBX.jpg"
@@ -213,11 +289,12 @@ export function HeroSection() {
           </motion.div>
         </div>
 
+        {/* Stats Cards */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8 }}
-          className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -237,6 +314,7 @@ export function HeroSection() {
           ))}
         </motion.div>
 
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
