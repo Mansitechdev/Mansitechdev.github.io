@@ -15,139 +15,58 @@ import {
 
 const projects = [
   {
-    title: "Wearable Ergonomic Risk Awareness System",
-    date: "Feb 2026 – Apr 2026",
-    association: "University of Twente",
-    image: "/projects/wearable-system/hardware.drawio.png",
-    description:
-      "Real-time wearable posture monitoring system using ESP32-S3 XIAO, four MPU6050 IMU sensors, TCA9548A I2C multiplexing, FSM-based posture classification, haptic feedback, and INT8 neural network inference.",
-    fullDescription:
-      "Developed a wearable ergonomic risk awareness system for occupational posture monitoring. The system used an ESP32-S3 XIAO, four MPU6050 IMU sensors placed at the hip, lower back, upper back, and neck, and a TCA9548A I2C multiplexer for multi-sensor communication. Firmware implemented 5-second calibration, approximately 100 Hz sensor reading, FSM-based posture classification, delayed haptic feedback, and INT8 on-device ML inference. The final quantized model achieved 74.2% validation accuracy.",
-    technologies: [
-      "ESP32-S3 XIAO",
-      "MPU6050",
-      "TCA9548A",
-      "TinyML",
-      "Embedded AI",
-      "I2C",
-      "FSM",
-      "INT8 Inference",
-      "Haptic Feedback",
-      "Edge Impulse",
-    ],
-    achievement: "Best Pervasive System Award – University of Twente",
-    challenges: [
-      "Integrated four MPU6050 IMU sensors using TCA9548A I2C multiplexing.",
-      "Implemented FSM states for standing, slouching, bending, deep bend, and prolonged flexion.",
-      "Designed delayed haptic feedback with cooldown to reduce alarm fatigue.",
-      "Deployed INT8 neural network inference on ESP32-S3 for on-device posture classification.",
-    ],
-    results: [
-      "Received Best Pervasive System Award at the University of Twente.",
-      "Achieved 74.2% validation accuracy with the INT8 posture classification model.",
-      "Demonstrated real-time wearable posture monitoring without cloud connectivity.",
-    ],
-    link: "/projects/wearable-system/PervasiveComputing-26-Cert1.pdf",
-    linkLabel: "View Certificate",
-    reportLink: "/projects/wearable-system/Pervasive Computing.pptx",
-    reportLabel: "View Project Presentation",
-    paperLink: "/projects/wearable-system/Research_Paper.pdf",
-    paperLabel: "View Research Paper",
-  },
-  {
-    title: "Embedded AI Optimization on KRIA KV260",
-    date: "Nov 2025 – Jan 2026",
-    association: "University of Twente",
-    image: null,
-    description:
-      "CNN-based CIFAR-10 image classification optimization for resource-constrained embedded AI deployment using quantization, CPU inference, FPGA acceleration, and Vitis AI on KRIA KV260.",
-    fullDescription:
-      "Designed and optimized CNN-based image classification networks for CIFAR-10 with deployment on the KRIA KV260 platform. The work compared CPU-only and FPGA-accelerated inference workflows and explored hardware-software co-optimization techniques including quantization, throughput optimization, and Vitis AI integration for resource-constrained embedded AI systems.",
-    technologies: [
-      "KRIA KV260",
-      "FPGA",
-      "Vitis AI",
-      "CNN",
-      "CIFAR-10",
-      "Quantization",
-      "Embedded AI",
-      "Hardware Acceleration",
-    ],
-    achievement: null,
-    challenges: [
-      "Optimized CNN inference for resource-constrained embedded hardware.",
-      "Compared CPU-only and FPGA-accelerated deployment workflows.",
-      "Applied quantization while maintaining practical classification performance.",
-    ],
-    results: [
-      "Built an embedded AI deployment workflow for KRIA KV260.",
-      "Explored FPGA acceleration for neural network inference.",
-    ],
-    link: null,
-    linkLabel: null,
-  },
-  {
-    title: "Detection of Parkinsonian Syndrome Using Wearable Sensors",
-    date: "Feb 2021 – Jun 2021",
-    association: "Vellore Institute of Technology",
-    image: null,
-    description:
-      "Wearable embedded sensing system for Parkinsonian gait and tremor analysis using EMG sensors, MPU6050 IMUs, Arduino-based data acquisition, and motion feature extraction.",
-    fullDescription:
-      "Developed a wearable embedded system for Parkinsonian gait and hand tremor analysis using EMG sensors, MPU6050 IMU modules, and Arduino-based data acquisition. Implemented sensing and motion analysis workflows to extract gait parameters, acceleration, tremor frequency, Euler angles, and orientation data for movement monitoring. The project focused on creating a low-cost portable healthcare monitoring solution capable of transmitting patient analysis data for further diagnosis.",
-    technologies: [
-      "EMG",
-      "MPU6050",
-      "Arduino",
-      "Python",
-      "MATLAB",
-      "Wearable Sensors",
-      "Signal Processing",
-      "Healthcare Monitoring",
-    ],
-    achievement: null,
-    challenges: [
-      "Captured motion and muscle activity data using wearable sensors.",
-      "Extracted gait and tremor-related features from sensor measurements.",
-      "Designed a portable sensing workflow for healthcare monitoring.",
-    ],
-    results: [
-      "Developed a low-cost wearable monitoring prototype for gait and tremor analysis.",
-    ],
-    link: null,
-    linkLabel: null,
-  },
-  {
-    title: "Automatic Pet Feeder",
-    date: "Aug 2021 – Jan 2022",
-    association: "Vellore Institute of Technology",
-    image: null,
-    description:
-      "IoT-enabled embedded pet feeding system with automated dispensing control, sensor-based monitoring, wireless communication, and low-power embedded control logic.",
-    fullDescription:
-      "Developed an IoT-enabled embedded pet feeding system with automated dispensing control, sensor-based monitoring, and wireless communication capabilities. Implemented embedded control logic for scheduled feeding operations under low-power and real-time system constraints. The project was published in AIP Conference Proceedings as an automated embedded monitoring and control solution for smart pet care applications.",
-    technologies: [
-      "IoT",
-      "Embedded C",
-      "ESP8266",
-      "Sensors",
-      "Wireless",
-      "Low-Power Control",
-      "Automation",
-    ],
-    achievement: "Published in AIP Conference Proceedings",
-    challenges: [
-      "Implemented reliable automated feeding control.",
-      "Integrated sensing and wireless communication for monitoring.",
-      "Designed embedded control logic under low-power constraints.",
-    ],
-    results: [
-      "Published in AIP Conference Proceedings.",
-      "Demonstrated an IoT-based embedded monitoring and control system.",
-    ],
-    link: "https://pubs.aip.org/aip/acp/article/2788/1/130005/2903975/Automatic-pet-feeder",
-    linkLabel: "View Publication",
-  },
+  title: "Wearable Ergonomic Risk Awareness System",
+  date: "Feb 2026 – Apr 2026",
+  association: "University of Twente",
+
+  image: "/projects/wearable-system/hardware.drawio.png",
+
+  description:
+    "Developed a wearable ergonomic risk awareness system for occupational posture monitoring.",
+
+  fullDescription:
+    "The system used an ESP32-S3 XIAO, four MPU6050 IMU sensors placed at the hip, lower back, upper back, and neck, and a TCA9548A I2C multiplexer for multi-sensor communication. Firmware implemented 5-second calibration, approximately 100 Hz sensor reading, FSM-based posture classification, delayed haptic feedback, and INT8 on-device ML inference. The final quantized model achieved 74.2% validation accuracy.",
+
+  technologies: [
+    "ESP32-S3 XIAO",
+    "MPU6050",
+    "TCA9548A",
+    "TinyML",
+    "Embedded AI",
+    "I2C",
+    "FSM",
+    "INT8 Inference",
+    "Haptic Feedback",
+    "Edge Impulse"
+  ],
+
+  achievement:
+    "Best Pervasive System Award – University of Twente",
+
+  challenges: [
+    "Integrated four MPU6050 IMU sensors using TCA9548A I2C multiplexing.",
+    "Implemented FSM states for standing, slouching, bending, deep bend, and prolonged flexion.",
+    "Designed delayed haptic feedback with cooldown to reduce alarm fatigue.",
+    "Deployed INT8 neural network inference on ESP32-S3 for on-device posture classification."
+  ],
+
+  results: [
+    "Received Best Pervasive System Award at the University of Twente.",
+    "Achieved 74.2% validation accuracy with the INT8 posture classification model.",
+    "Demonstrated real-time wearable posture monitoring without cloud connectivity."
+  ],
+
+  link: "/projects/wearable-system/PervasiveComputing-26-Cert1.pdf",
+  linkLabel: "View Award Certificate",
+
+  paperLink: "/projects/wearable-system/Research_Paper.pdf",
+  paperLabel: "View Research Paper",
+
+  reportLink: "/projects/wearable-system/Pervasive Computing.pptx",
+  reportLabel: "View Project Presentation",
+
+  featured: true
+}
 ]
 
 function ProjectCard({
