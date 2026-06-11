@@ -18,12 +18,13 @@ const projects = [
     title: "Wearable Ergonomic Risk Awareness System",
     date: "Feb 2026 – Apr 2026",
     association: "University of Twente",
+    image: "/projects/wearable-system/hardware.drawio.png",
     description:
-      "Real-time wearable posture monitoring system using ESP32-S3, MPU6050 IMU sensors, TCA9548A I2C multiplexer, embedded haptic feedback, FSM-based posture classification, and INT8 neural network inference.",
+      "Real-time wearable posture monitoring system using ESP32-S3 XIAO, four MPU6050 IMU sensors, TCA9548A I2C multiplexing, FSM-based posture classification, haptic feedback, and INT8 neural network inference.",
     fullDescription:
-      "Developed a real-time wearable ergonomic risk awareness system for posture monitoring and feedback. The system used ESP32-S3, multiple MPU6050 IMU sensors, a TCA9548A I2C multiplexer, embedded haptic feedback, FSM-based posture classification, and INT8 neural network inference for on-device embedded ML. The project focused on robust multi-sensor integration, real-time signal processing, and reliable embedded system behavior under wearable constraints.",
+      "Developed a wearable ergonomic risk awareness system for occupational posture monitoring. The system used an ESP32-S3 XIAO, four MPU6050 IMU sensors placed at the hip, lower back, upper back, and neck, and a TCA9548A I2C multiplexer for multi-sensor communication. Firmware implemented 5-second calibration, approximately 100 Hz sensor reading, FSM-based posture classification, delayed haptic feedback, and INT8 on-device ML inference. The final quantized model achieved 74.2% validation accuracy.",
     technologies: [
-      "ESP32-S3",
+      "ESP32-S3 XIAO",
       "MPU6050",
       "TCA9548A",
       "TinyML",
@@ -32,25 +33,28 @@ const projects = [
       "FSM",
       "INT8 Inference",
       "Haptic Feedback",
+      "Edge Impulse",
     ],
     achievement: "Best Pervasive System Award – University of Twente",
     challenges: [
-      "Integrated multiple IMU sensors across the body using I2C multiplexing.",
-      "Implemented real-time posture classification on a resource-constrained embedded platform.",
-      "Balanced sensor reliability, feedback timing, and embedded ML inference constraints.",
+      "Integrated four MPU6050 IMU sensors using TCA9548A I2C multiplexing.",
+      "Implemented FSM states for standing, slouching, bending, deep bend, and prolonged flexion.",
+      "Designed delayed haptic feedback with cooldown to reduce alarm fatigue.",
+      "Deployed INT8 neural network inference on ESP32-S3 for on-device posture classification.",
     ],
     results: [
       "Received Best Pervasive System Award at the University of Twente.",
-      "Demonstrated robust real-time posture classification using wearable sensing.",
+      "Achieved 74.2% validation accuracy with the INT8 posture classification model.",
+      "Demonstrated real-time wearable posture monitoring without cloud connectivity.",
     ],
-    link: "/PervasiveComputing-26-Cert1.pdf",
+    link: "/projects/wearable-system/PervasiveComputing-26-Cert1.pdf",
     linkLabel: "View Certificate",
-    featured: true,
   },
   {
     title: "Embedded AI Optimization on KRIA KV260",
     date: "Nov 2025 – Jan 2026",
     association: "University of Twente",
+    image: null,
     description:
       "CNN-based CIFAR-10 image classification optimization for resource-constrained embedded AI deployment using quantization, CPU inference, FPGA acceleration, and Vitis AI on KRIA KV260.",
     fullDescription:
@@ -77,12 +81,12 @@ const projects = [
     ],
     link: null,
     linkLabel: null,
-    featured: true,
   },
   {
     title: "Detection of Parkinsonian Syndrome Using Wearable Sensors",
     date: "Feb 2021 – Jun 2021",
     association: "Vellore Institute of Technology",
+    image: null,
     description:
       "Wearable embedded sensing system for Parkinsonian gait and tremor analysis using EMG sensors, MPU6050 IMUs, Arduino-based data acquisition, and motion feature extraction.",
     fullDescription:
@@ -108,12 +112,12 @@ const projects = [
     ],
     link: null,
     linkLabel: null,
-    featured: true,
   },
   {
     title: "Automatic Pet Feeder",
     date: "Aug 2021 – Jan 2022",
     association: "Vellore Institute of Technology",
+    image: null,
     description:
       "IoT-enabled embedded pet feeding system with automated dispensing control, sensor-based monitoring, wireless communication, and low-power embedded control logic.",
     fullDescription:
@@ -139,95 +143,6 @@ const projects = [
     ],
     link: "https://pubs.aip.org/aip/acp/article/2788/1/130005/2903975/Automatic-pet-feeder",
     linkLabel: "View Publication",
-    featured: true,
-  },
-  {
-    title: "RFID-Based Warehouse Management System",
-    date: "Nov 2022 – Apr 2023",
-    association: "Academic Project",
-    description:
-      "RFID-based inventory management system for telecom warehouse operations with GUI support, AES encryption, OTP/email verification, billing, and secure inventory tracking.",
-    fullDescription:
-      "Designed an RFID-enabled warehouse management system for mobile station inventory tracking in the telecom domain. The system used RFID tag scanning, a user-friendly GUI, AES encryption, OTP and email-based verification, inventory management, and billing functionality. The project focused on improving inventory visibility, operational tracking, and secure access control.",
-    technologies: [
-      "RFID",
-      "AES Encryption",
-      "GUI",
-      "Inventory Management",
-      "Authentication",
-      "Database",
-      "Security",
-    ],
-    achievement: null,
-    challenges: [
-      "Integrated RFID-based asset identification with inventory workflows.",
-      "Implemented authentication and encryption for secure access.",
-      "Designed GUI-based operations for inventory and billing management.",
-    ],
-    results: [
-      "Built a secure inventory management workflow using RFID and authentication.",
-    ],
-    link: null,
-    linkLabel: null,
-    featured: false,
-  },
-  {
-    title: "Fisherman Border Alert and Fish Detection System",
-    date: "Jan 2022 – Apr 2022",
-    association: "Vellore Institute of Technology",
-    description:
-      "Embedded alert system using GPS and underwater ultrasonic sensing to warn fishermen near maritime borders and assist with fish density detection.",
-    fullDescription:
-      "Developed an embedded border alert and fish detection system for fishermen operating near coastal boundaries. The system used GPS-based location tracking to alert users when approaching restricted border zones and underwater ultrasonic sensing to estimate fish density for efficient fishing. The project addressed safety, navigation awareness, and resource identification in marine environments.",
-    technologies: [
-      "GPS",
-      "Ultrasonic Sensor",
-      "Embedded Systems",
-      "Alerts",
-      "Navigation",
-      "Sensor Integration",
-    ],
-    achievement: null,
-    challenges: [
-      "Integrated GPS-based location monitoring for boundary awareness.",
-      "Used ultrasonic sensing for underwater fish density estimation.",
-      "Designed alert logic for safety-critical field conditions.",
-    ],
-    results: [
-      "Developed a prototype concept for fishing safety and resource detection.",
-    ],
-    link: null,
-    linkLabel: null,
-    featured: false,
-  },
-  {
-    title: "IoT-Based Safety and Emergency Tracker",
-    date: "Jan 2022 – Apr 2022",
-    association: "Vellore Institute of Technology",
-    description:
-      "Wearable safety device designed to monitor user health, trigger emergency alerts, and send messages to pre-configured contacts during critical situations.",
-    fullDescription:
-      "Developed a wearable IoT-based safety and emergency tracker designed for personal safety applications. The system used sensors, transmission modules, and data processing logic to monitor health-related signals, detect emergency situations, and notify pre-configured contacts. The project explored wearable sensing, emergency communication, and early health-risk indication.",
-    technologies: [
-      "IoT",
-      "Wearable Device",
-      "Sensors",
-      "Emergency Alerts",
-      "Wireless Communication",
-      "Health Monitoring",
-    ],
-    achievement: null,
-    challenges: [
-      "Designed emergency alert logic for wearable safety use cases.",
-      "Integrated sensing and wireless communication modules.",
-      "Focused on fast notification to pre-configured emergency contacts.",
-    ],
-    results: [
-      "Built a wearable safety monitoring concept for emergency communication.",
-    ],
-    link: null,
-    linkLabel: null,
-    featured: false,
   },
 ]
 
@@ -250,13 +165,21 @@ function ProjectCard({
       className="group"
     >
       <div className="relative rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 overflow-hidden">
-        <div className="relative h-48 md:h-56 bg-gradient-to-br from-secondary via-secondary/80 to-muted overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center space-y-2">
-              <ImageIcon className="w-12 h-12 text-muted-foreground/50 mx-auto" />
-              <p className="text-sm text-muted-foreground/50">Project Image</p>
+        <div className="relative h-56 bg-gradient-to-br from-secondary via-secondary/80 to-muted overflow-hidden">
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center space-y-2">
+                <ImageIcon className="w-12 h-12 text-muted-foreground/50 mx-auto" />
+                <p className="text-sm text-muted-foreground/50">Project Image</p>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
 
@@ -281,9 +204,7 @@ function ProjectCard({
             </h3>
 
             <p className="text-muted-foreground text-sm leading-relaxed">
-              {isExpanded && project.fullDescription
-                ? project.fullDescription
-                : project.description}
+              {isExpanded ? project.fullDescription : project.description}
             </p>
           </div>
 
@@ -319,24 +240,22 @@ function ProjectCard({
                 </ul>
               </div>
 
-              {project.results.length > 0 && (
-                <div>
-                  <h4 className="text-sm font-semibold text-foreground mb-2">
-                    Outcome
-                  </h4>
-                  <ul className="space-y-1">
-                    {project.results.map((result, i) => (
-                      <li
-                        key={i}
-                        className="text-sm text-primary flex items-start gap-2"
-                      >
-                        <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                        {result}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <div>
+                <h4 className="text-sm font-semibold text-foreground mb-2">
+                  Outcome
+                </h4>
+                <ul className="space-y-1">
+                  {project.results.map((result, i) => (
+                    <li
+                      key={i}
+                      className="text-sm text-primary flex items-start gap-2"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
+                      {result}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           )}
 
@@ -344,11 +263,7 @@ function ProjectCard({
             {project.technologies
               .slice(0, isExpanded ? undefined : 5)
               .map((tech) => (
-                <Badge
-                  key={tech}
-                  variant="secondary"
-                  className="text-xs bg-secondary/80 text-secondary-foreground hover:bg-primary/20 hover:text-primary transition-colors"
-                >
+                <Badge key={tech} variant="secondary" className="text-xs">
                   {tech}
                 </Badge>
               ))}
@@ -361,34 +276,28 @@ function ProjectCard({
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2">
-            {project.fullDescription && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="flex-1 gap-2"
-              >
-                {isExpanded ? (
-                  <>
-                    <ChevronUp className="w-4 h-4" />
-                    Show Less
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className="w-4 h-4" />
-                    Technical Details
-                  </>
-                )}
-              </Button>
-            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex-1 gap-2"
+            >
+              {isExpanded ? (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  Show Less
+                </>
+              ) : (
+                <>
+                  <ChevronDown className="w-4 h-4" />
+                  Technical Details
+                </>
+              )}
+            </Button>
 
             {project.link && project.linkLabel && (
               <Button variant="outline" size="sm" asChild className="gap-2">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={project.link} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-4 h-4" />
                   {project.linkLabel}
                 </a>
@@ -422,8 +331,7 @@ export function ProjectsSection() {
           </p>
 
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Featured{" "}
-            <span className="gradient-text">Work</span>
+            Featured <span className="gradient-text">Work</span>
           </h2>
 
           <p className="text-muted-foreground text-lg max-w-2xl">
