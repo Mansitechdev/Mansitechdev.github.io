@@ -15,58 +15,45 @@ import {
 
 const projects = [
   {
-  title: "Wearable Ergonomic Risk Awareness System",
-  date: "Feb 2026 – Apr 2026",
-  association: "University of Twente",
-
-  image: "/projects/wearable-system/hardware.drawio.png",
-
-  description:
-    "Developed a wearable ergonomic risk awareness system for occupational posture monitoring.",
-
-  fullDescription:
-    "The system used an ESP32-S3 XIAO, four MPU6050 IMU sensors placed at the hip, lower back, upper back, and neck, and a TCA9548A I2C multiplexer for multi-sensor communication. Firmware implemented 5-second calibration, approximately 100 Hz sensor reading, FSM-based posture classification, delayed haptic feedback, and INT8 on-device ML inference. The final quantized model achieved 74.2% validation accuracy.",
-
-  technologies: [
-    "ESP32-S3 XIAO",
-    "MPU6050",
-    "TCA9548A",
-    "TinyML",
-    "Embedded AI",
-    "I2C",
-    "FSM",
-    "INT8 Inference",
-    "Haptic Feedback",
-    "Edge Impulse"
-  ],
-
-  achievement:
-    "Best Pervasive System Award – University of Twente",
-
-  challenges: [
-    "Integrated four MPU6050 IMU sensors using TCA9548A I2C multiplexing.",
-    "Implemented FSM states for standing, slouching, bending, deep bend, and prolonged flexion.",
-    "Designed delayed haptic feedback with cooldown to reduce alarm fatigue.",
-    "Deployed INT8 neural network inference on ESP32-S3 for on-device posture classification."
-  ],
-
-  results: [
-    "Received Best Pervasive System Award at the University of Twente.",
-    "Achieved 74.2% validation accuracy with the INT8 posture classification model.",
-    "Demonstrated real-time wearable posture monitoring without cloud connectivity."
-  ],
-
-  link: "/projects/wearable-system/PervasiveComputing-26-Cert1.pdf",
-  linkLabel: "View Award Certificate",
-
-  paperLink: "/projects/wearable-system/Research_Paper.pdf",
-  paperLabel: "View Research Paper",
-
-  reportLink: "/projects/wearable-system/Pervasive Computing.pptx",
-  reportLabel: "View Project Presentation",
-
-  featured: true
-}
+    title: "Wearable Ergonomic Risk Awareness System",
+    date: "Feb 2026 – Apr 2026",
+    association: "University of Twente",
+    image: "/projects/wearable-system/hardware.drawio.png",
+    description:
+      "Developed a wearable ergonomic risk awareness system for occupational posture monitoring.",
+    fullDescription:
+      "The system used an ESP32-S3 XIAO, four MPU6050 IMU sensors placed at the hip, lower back, upper back, and neck, and a TCA9548A I2C multiplexer for multi-sensor communication. Firmware implemented 5-second calibration, approximately 100 Hz sensor reading, FSM-based posture classification, delayed haptic feedback, and INT8 on-device ML inference. The final quantized model achieved 74.2% validation accuracy.",
+    technologies: [
+      "ESP32-S3 XIAO",
+      "MPU6050",
+      "TCA9548A",
+      "TinyML",
+      "Embedded AI",
+      "I2C",
+      "FSM",
+      "INT8 Inference",
+      "Haptic Feedback",
+      "Edge Impulse",
+    ],
+    achievement: "Best Pervasive System Award – University of Twente",
+    challenges: [
+      "Integrated four MPU6050 IMU sensors using TCA9548A I2C multiplexing.",
+      "Implemented FSM states for standing, slouching, bending, deep bend, and prolonged flexion.",
+      "Designed delayed haptic feedback with cooldown to reduce alarm fatigue.",
+      "Deployed INT8 neural network inference on ESP32-S3 for on-device posture classification.",
+    ],
+    results: [
+      "Received Best Pervasive System Award at the University of Twente.",
+      "Achieved 74.2% validation accuracy with the INT8 posture classification model.",
+      "Demonstrated real-time wearable posture monitoring without cloud connectivity.",
+    ],
+    link: "/projects/wearable-system/PervasiveComputing-26-Cert1.pdf",
+    linkLabel: "View Award Certificate",
+    paperLink: "/projects/wearable-system/Research_Paper.pdf",
+    paperLabel: "View Research Paper",
+    reportLink: "/projects/wearable-system/Pervasive Computing.pptx",
+    reportLabel: "View Project Presentation",
+  },
 ]
 
 function ProjectCard({
@@ -198,12 +185,12 @@ function ProjectCard({
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="flex-1 gap-2"
+              className="gap-2"
             >
               {isExpanded ? (
                 <>
@@ -223,6 +210,24 @@ function ProjectCard({
                 <a href={project.link} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="w-4 h-4" />
                   {project.linkLabel}
+                </a>
+              </Button>
+            )}
+
+            {project.paperLink && project.paperLabel && (
+              <Button variant="outline" size="sm" asChild className="gap-2">
+                <a href={project.paperLink} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="w-4 h-4" />
+                  {project.paperLabel}
+                </a>
+              </Button>
+            )}
+
+            {project.reportLink && project.reportLabel && (
+              <Button variant="outline" size="sm" asChild className="gap-2">
+                <a href={project.reportLink} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="w-4 h-4" />
+                  {project.reportLabel}
                 </a>
               </Button>
             )}
