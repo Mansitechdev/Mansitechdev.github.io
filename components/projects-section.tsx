@@ -49,6 +49,10 @@ const projects = [
     ],
     link: "/projects/wearable-system/PervasiveComputing-26-Cert1.pdf",
     linkLabel: "View Certificate",
+    reportLink: "/projects/wearable-system/Pervasive Computing.pptx",
+    reportLabel: "View Project Presentation",
+    paperLink: "/projects/wearable-system/Research_Paper.pdf",
+    paperLabel: "View Research Paper",
   },
   {
     title: "Embedded AI Optimization on KRIA KV260",
