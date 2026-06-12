@@ -13,7 +13,30 @@ import {
   Image as ImageIcon,
 } from "lucide-react"
 
-const projects = [
+type Project = {
+  title: string
+  date: string
+  association: string
+  image: string | null
+  description: string
+  fullDescription: string
+  technologies: string[]
+  achievement: string | null
+  challenges: string[]
+  results: string[]
+  link?: string | null
+  linkLabel?: string | null
+  paperLink?: string | null
+  paperLabel?: string | null
+  reportLink?: string | null
+  reportLabel?: string | null
+  certificateLink?: string | null
+  certificateLabel?: string | null
+  coauthorLink?: string | null
+  coauthorLabel?: string | null
+}
+
+const projects: Project[] = [
   {
     title: "Wearable Ergonomic Risk Awareness System",
     date: "Feb 2026 – Apr 2026",
@@ -51,8 +74,85 @@ const projects = [
     linkLabel: "View Award Certificate",
     paperLink: "/projects/wearable-system/Research_Paper.pdf",
     paperLabel: "View Research Paper",
-    reportLink: "/projects/wearable-system/Pervasive Computing.pptx",
+    reportLink: "/projects/wearable-system/wearable-system-presentation.pdf",
     reportLabel: "View Project Presentation",
+  },
+  {
+    title: "Embedded AI Optimization on KRIA KV260",
+    date: "Nov 2025 – Jan 2026",
+    association: "University of Twente",
+    image: "/projects/embedded-ai-kv260/cnn-acceleration-diagram.png",
+    description:
+      "Designed, trained, quantized, and deployed CNN image classification models on AMD Xilinx KRIA KV260, comparing ARM CPU inference against FPGA-accelerated DPU execution using Vitis AI.",
+    fullDescription:
+      "Developed an end-to-end embedded AI deployment pipeline targeting the AMD Xilinx KRIA KV260 platform. Trained a CNN for CIFAR-10 classification, deployed inference on the ARM Cortex-A53 CPU, and accelerated execution using the FPGA fabric through Vitis AI and DPU deployment. The project focused on hardware-software co-design, INT8 quantization, throughput optimization, and maintaining classification accuracy under embedded deployment constraints.",
+    technologies: [
+      "KRIA KV260",
+      "FPGA",
+      "Vitis AI",
+      "CNN",
+      "CIFAR-10",
+      "TensorFlow",
+      "Quantization",
+      "DPU",
+      "Embedded AI",
+    ],
+    achievement: "37× Throughput Gain with FPGA Acceleration",
+    challenges: [
+      "Designed and trained CNN architectures for CIFAR-10 classification using TensorFlow/Keras.",
+      "Deployed and benchmarked CPU-only inference on ARM Cortex-A53.",
+      "Applied INT8 quantization and DPU compilation using Vitis AI.",
+      "Optimized accuracy-throughput trade-offs for FPGA-accelerated embedded AI deployment.",
+    ],
+    results: [
+      "Achieved 90.69% CIFAR-10 classification accuracy.",
+      "Reduced inference latency from 32 ms to 0.9 ms per image.",
+      "Improved throughput from 30 FPS to 1100 FPS using FPGA acceleration.",
+      "Maintained less than 1.1% accuracy loss after INT8 quantization.",
+    ],
+    reportLink: "/projects/embedded-ai-kv260/presentation_group_09.pptx",
+    reportLabel: "View Project Presentation",
+  },
+  {
+    title: "Wearable Parkinson's Disease Detection System",
+    date: "Dec 2021",
+    association: "VIT Chennai",
+    image: "/projects/parkinson/parkinson-block-diagram.png",
+    description:
+      "Published wearable healthcare system for Parkinson's disease assessment using IMU and EMG sensing.",
+    fullDescription:
+      "Developed and published a wearable Parkinson's disease monitoring system combining EMG sensing and MPU6050 IMU-based gait analysis. The platform was designed as an affordable and easy-to-use diagnostic aid capable of detecting hand tremors and Parkinsonian gait characteristics. Arduino-based data acquisition was used to capture sensor data and generate gait parameters including Euler angles, yaw, pitch, roll, quaternion values, acceleration, and world-frame acceleration. Results could be reviewed locally and shared with physicians through a reporting workflow.",
+    technologies: [
+      "Arduino Nano",
+      "MPU6050",
+      "EMG Sensor",
+      "IMU",
+      "Wearable Sensing",
+      "Biomedical Engineering",
+      "Signal Processing",
+      "Healthcare IoT",
+    ],
+    achievement: "International Conference Publication",
+    challenges: [
+      "Integrated EMG and IMU sensing into a wearable healthcare platform.",
+      "Implemented hand tremor analysis using muscle activity measurements.",
+      "Performed gait analysis using accelerometer and gyroscope data.",
+      "Designed a low-cost diagnostic system suitable for elderly users.",
+    ],
+    results: [
+      "Published research paper at an international conference.",
+      "Successfully demonstrated wearable hand tremor and gait monitoring.",
+      "Generated gait parameters including Euler angles, yaw, pitch, roll, and acceleration.",
+      "Enabled physician-oriented reporting workflow for remote assessment.",
+    ],
+    paperLink: "/projects/parkinson/Parkinson_Paper.pdf",
+    paperLabel: "View Research Paper",
+    reportLink: "/projects/parkinson/Conference_Presentation.pdf",
+    reportLabel: "View Presentation",
+    certificateLink: "/projects/parkinson/presentation-certificate.pdf",
+    certificateLabel: "View Presentation Certificate",
+    coauthorLink: "/projects/parkinson/coauthor-certificate.pdf",
+    coauthorLabel: "View Co-author Certificate",
   },
 ]
 
@@ -61,11 +161,19 @@ function ProjectCard({
   index,
   isInView,
 }: {
-  project: (typeof projects)[0]
+  project: Project
   index: number
   isInView: boolean
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
+
+  const actionLinks = [
+    { href: project.link, label: project.linkLabel },
+    { href: project.paperLink, label: project.paperLabel },
+    { href: project.reportLink, label: project.reportLabel },
+    { href: project.certificateLink, label: project.certificateLabel },
+    { href: project.coauthorLink, label: project.coauthorLabel },
+  ].filter((item) => item.href && item.label)
 
   return (
     <motion.div
@@ -75,12 +183,12 @@ function ProjectCard({
       className="group"
     >
       <div className="relative rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 overflow-hidden">
-        <div className="relative h-56 bg-gradient-to-br from-secondary via-secondary/80 to-muted overflow-hidden">
+        <div className="relative h-72 bg-card overflow-hidden">
           {project.image ? (
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -106,7 +214,9 @@ function ProjectCard({
             <div className="flex flex-wrap items-center gap-2 mb-2">
               <p className="text-xs text-primary font-mono">{project.date}</p>
               <span className="text-xs text-muted-foreground">•</span>
-              <p className="text-xs text-muted-foreground">{project.association}</p>
+              <p className="text-xs text-muted-foreground">
+                {project.association}
+              </p>
             </div>
 
             <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
@@ -205,32 +315,24 @@ function ProjectCard({
               )}
             </Button>
 
-            {project.link && project.linkLabel && (
-              <Button variant="outline" size="sm" asChild className="gap-2">
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
+            {actionLinks.map((item) => (
+              <Button
+                key={item.label}
+                variant="outline"
+                size="sm"
+                asChild
+                className="gap-2"
+              >
+                <a
+                  href={item.href as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <ExternalLink className="w-4 h-4" />
-                  {project.linkLabel}
+                  {item.label}
                 </a>
               </Button>
-            )}
-
-            {project.paperLink && project.paperLabel && (
-              <Button variant="outline" size="sm" asChild className="gap-2">
-                <a href={project.paperLink} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4" />
-                  {project.paperLabel}
-                </a>
-              </Button>
-            )}
-
-            {project.reportLink && project.reportLabel && (
-              <Button variant="outline" size="sm" asChild className="gap-2">
-                <a href={project.reportLink} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4" />
-                  {project.reportLabel}
-                </a>
-              </Button>
-            )}
+            ))}
           </div>
         </div>
       </div>
