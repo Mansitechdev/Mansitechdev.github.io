@@ -1,8 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useMemo } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,6 +11,7 @@ import {
   ChevronUp,
   ExternalLink,
   Image as ImageIcon,
+  Cpu,
 } from "lucide-react"
 
 type Project = {
@@ -156,18 +157,31 @@ const projects: Project[] = [
   },
 ]
 
-function ProjectCard({
-  project,
-  index,
-  isInView,
-}: {
-  project: Project
-  index: number
-  isInView: boolean
-}) {
-  const [isExpanded, setIsExpanded] = useState(false)
+// Iridescent die hues: violet / cyan / magenta
+const HUES = ["#A78BFA", "#34E0E8", "#F472B6"]
 
-  const actionLinks = [
+// Wafer geometry
+const WAFER = { vb: 460, cx: 230, cy: 230, r: 198, die: 56, step: 70 }
+
+// Centered die positions for N projects, filling from the centre outward
+function generatePositions(n: number) {
+  const cells: { cx: number; cy: number; d: number; a: number }[] = []
+  for (let i = -3; i <= 3; i++) {
+    for (let j = -3; j <= 3; j++) {
+      const cx = WAFER.cx + i * WAFER.step
+      const cy = WAFER.cy + j * WAFER.step
+      const d = Math.hypot(i * WAFER.step, j * WAFER.step)
+      if (d + WAFER.die / 2 <= WAFER.r - 10) {
+        cells.push({ cx, cy, d, a: Math.atan2(j, i) })
+      }
+    }
+  }
+  cells.sort((p, q) => p.d - q.d || p.a - q.a)
+  return cells.slice(0, n)
+}
+
+function ActionButtons({ project }: { project: Project }) {
+  const links = [
     { href: project.link, label: project.linkLabel },
     { href: project.paperLink, label: project.paperLabel },
     { href: project.reportLink, label: project.reportLabel },
@@ -175,174 +189,35 @@ function ProjectCard({
     { href: project.coauthorLink, label: project.coauthorLabel },
   ].filter((item) => item.href && item.label)
 
+  if (links.length === 0) return null
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-      className="group"
-    >
-      <div className="relative rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300 overflow-hidden">
-        <div className="relative h-72 bg-card overflow-hidden">
-          {project.image ? (
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center space-y-2">
-                <ImageIcon className="w-12 h-12 text-muted-foreground/50 mx-auto" />
-                <p className="text-sm text-muted-foreground/50">Project Image</p>
-              </div>
-            </div>
-          )}
-
-          <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
-
-          {project.achievement && (
-            <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium backdrop-blur-sm">
-              <Award className="w-3 h-3" />
-              Highlight
-            </div>
-          )}
-        </div>
-
-        <div className="p-6 space-y-4">
-          <div>
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <p className="text-xs text-primary font-mono">{project.date}</p>
-              <span className="text-xs text-muted-foreground">•</span>
-              <p className="text-xs text-muted-foreground">
-                {project.association}
-              </p>
-            </div>
-
-            <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
-              {project.title}
-            </h3>
-
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              {isExpanded ? project.fullDescription : project.description}
-            </p>
-          </div>
-
-          {project.achievement && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/10 border border-primary/20">
-              <Award className="w-4 h-4 text-primary flex-shrink-0" />
-              <span className="text-sm font-medium text-primary">
-                {project.achievement}
-              </span>
-            </div>
-          )}
-
-          {isExpanded && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              className="space-y-4 pt-4 border-t border-border/50"
-            >
-              <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">
-                  Engineering Focus
-                </h4>
-                <ul className="space-y-1">
-                  {project.challenges.map((challenge, i) => (
-                    <li
-                      key={i}
-                      className="text-sm text-muted-foreground flex items-start gap-2"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
-                      {challenge}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-semibold text-foreground mb-2">
-                  Outcome
-                </h4>
-                <ul className="space-y-1">
-                  {project.results.map((result, i) => (
-                    <li
-                      key={i}
-                      className="text-sm text-primary flex items-start gap-2"
-                    >
-                      <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
-                      {result}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          )}
-
-          <div className="flex flex-wrap gap-2">
-            {project.technologies
-              .slice(0, isExpanded ? undefined : 5)
-              .map((tech) => (
-                <Badge key={tech} variant="secondary" className="text-xs">
-                  {tech}
-                </Badge>
-              ))}
-
-            {!isExpanded && project.technologies.length > 5 && (
-              <Badge variant="outline" className="text-xs">
-                +{project.technologies.length - 5} more
-              </Badge>
-            )}
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="gap-2"
-            >
-              {isExpanded ? (
-                <>
-                  <ChevronUp className="w-4 h-4" />
-                  Show Less
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-4 h-4" />
-                  Technical Details
-                </>
-              )}
-            </Button>
-
-            {actionLinks.map((item) => (
-              <Button
-                key={item.label}
-                variant="outline"
-                size="sm"
-                asChild
-                className="gap-2"
-              >
-                <a
-                  href={item.href as string}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  {item.label}
-                </a>
-              </Button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
+    <div className="flex flex-wrap gap-2">
+      {links.map((item) => (
+        <Button key={item.label} variant="outline" size="sm" asChild className="gap-2">
+          <a href={item.href as string} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="w-4 h-4" />
+            {item.label}
+          </a>
+        </Button>
+      ))}
+    </div>
   )
 }
 
 export function ProjectsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const [selected, setSelected] = useState(0)
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  const positions = useMemo(() => generatePositions(projects.length), [])
+  const gridLines = useMemo(() => Array.from({ length: 11 }, (_, i) => 30 + i * 40), [])
+  const project = projects[selected]
+
+  const pick = (i: number) => {
+    setSelected(i)
+    setIsExpanded(false)
+  }
 
   return (
     <section id="projects" className="py-32 relative overflow-hidden bg-secondary/30">
@@ -371,15 +246,221 @@ export function ProjectsSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              index={index}
-              isInView={isInView}
-            />
-          ))}
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+          {/* Wafer of projects */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7 }}
+            className="flex justify-center lg:sticky lg:top-24"
+          >
+            <svg
+              viewBox={`0 0 ${WAFER.vb} ${WAFER.vb}`}
+              className="w-full max-w-[460px]"
+              role="img"
+              aria-label="Silicon wafer of projects"
+            >
+              <defs>
+                <linearGradient id="proj-wafer-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#A78BFA" />
+                  <stop offset="55%" stopColor="#34E0E8" />
+                  <stop offset="100%" stopColor="#F472B6" />
+                </linearGradient>
+                <clipPath id="proj-wafer-clip">
+                  <circle cx={WAFER.cx} cy={WAFER.cy} r={WAFER.r} />
+                </clipPath>
+              </defs>
+
+              {/* Faint die grid */}
+              <g clipPath="url(#proj-wafer-clip)" stroke="#A78BFA" strokeWidth="0.75" opacity="0.14">
+                {gridLines.map((x) => (
+                  <line key={`v-${x}`} x1={x} y1="20" x2={x} y2={WAFER.vb - 20} />
+                ))}
+                {gridLines.map((y) => (
+                  <line key={`h-${y}`} x1="20" y1={y} x2={WAFER.vb - 20} y2={y} />
+                ))}
+              </g>
+
+              {/* Wafer edge + inner ring + flat */}
+              <circle cx={WAFER.cx} cy={WAFER.cy} r={WAFER.r} fill="none" stroke="url(#proj-wafer-grad)" strokeWidth="2" opacity="0.7" />
+              <circle cx={WAFER.cx} cy={WAFER.cy} r={WAFER.r - 14} fill="none" stroke="#34E0E8" strokeWidth="1" opacity="0.25" />
+              <line x1={WAFER.cx - 56} y1={WAFER.cy + WAFER.r - 6} x2={WAFER.cx + 56} y2={WAFER.cy + WAFER.r - 6} stroke="#F472B6" strokeWidth="2" opacity="0.5" />
+
+              {/* Project dies (labelled by number) */}
+              {positions.map((pos, i) => {
+                const hue = HUES[i % HUES.length]
+                const active = i === selected
+                const x = pos.cx - WAFER.die / 2
+                const y = pos.cy - WAFER.die / 2
+                return (
+                  <motion.g
+                    key={projects[i].title}
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+                    style={{ cursor: "pointer", transformOrigin: `${pos.cx}px ${pos.cy}px` }}
+                    onClick={() => pick(i)}
+                    onMouseEnter={() => pick(i)}
+                  >
+                    <title>{projects[i].title}</title>
+                    <rect
+                      x={x}
+                      y={y}
+                      width={WAFER.die}
+                      height={WAFER.die}
+                      rx="6"
+                      fill={hue}
+                      fillOpacity={active ? 0.9 : 0.14}
+                      stroke={hue}
+                      strokeWidth={active ? 2 : 1}
+                    />
+                    <text
+                      x={pos.cx}
+                      y={pos.cy + 5}
+                      textAnchor="middle"
+                      fontSize="15"
+                      fontFamily="var(--font-mono, monospace)"
+                      fill={active ? "#0A0612" : hue}
+                      style={{ pointerEvents: "none" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </text>
+                  </motion.g>
+                )
+              })}
+            </svg>
+          </motion.div>
+
+          {/* Detail panel for the selected die */}
+          <div className="min-h-[420px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selected}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.35 }}
+                className="rounded-2xl bg-card border border-border/50 overflow-hidden"
+              >
+                {/* Project image */}
+                <div className="relative h-64 bg-card overflow-hidden border-b border-border/50">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-contain p-2"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center space-y-2">
+                        <ImageIcon className="w-12 h-12 text-muted-foreground/50 mx-auto" />
+                        <p className="text-sm text-muted-foreground/50">Project Image</p>
+                      </div>
+                    </div>
+                  )}
+                  {project.achievement && (
+                    <div className="absolute top-4 right-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium backdrop-blur-sm">
+                      <Award className="w-3 h-3" />
+                      Highlight
+                    </div>
+                  )}
+                </div>
+
+                <div className="p-6 space-y-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-mono text-primary">
+                      <Cpu className="w-3.5 h-3.5" />
+                      Die {String(selected + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                    </span>
+                    <span className="text-xs text-muted-foreground">•</span>
+                    <p className="text-xs text-primary font-mono">{project.date}</p>
+                    <span className="text-xs text-muted-foreground">•</span>
+                    <p className="text-xs text-muted-foreground">{project.association}</p>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-foreground">{project.title}</h3>
+
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {isExpanded ? project.fullDescription : project.description}
+                  </p>
+
+                  {project.achievement && (
+                    <div className="flex items-center gap-2 p-3 rounded-lg bg-primary/10 border border-primary/20">
+                      <Award className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="text-sm font-medium text-primary">{project.achievement}</span>
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies
+                      .slice(0, isExpanded ? undefined : 5)
+                      .map((tech) => (
+                        <Badge key={tech} variant="secondary" className="text-xs">
+                          {tech}
+                        </Badge>
+                      ))}
+                    {!isExpanded && project.technologies.length > 5 && (
+                      <Badge variant="outline" className="text-xs">
+                        +{project.technologies.length - 5} more
+                      </Badge>
+                    )}
+                  </div>
+
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="space-y-4 pt-2 border-t border-border/50 overflow-hidden"
+                      >
+                        <div>
+                          <h4 className="text-sm font-semibold text-foreground mb-2">Engineering Focus</h4>
+                          <ul className="space-y-1">
+                            {project.challenges.map((challenge, i) => (
+                              <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                                <span className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
+                                {challenge}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-semibold text-foreground mb-2">Outcome</h4>
+                          <ul className="space-y-1">
+                            {project.results.map((result, i) => (
+                              <li key={i} className="text-sm text-primary flex items-start gap-2">
+                                <span className="w-1 h-1 rounded-full bg-primary mt-2 flex-shrink-0" />
+                                {result}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="ghost" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="gap-2">
+                      {isExpanded ? (
+                        <>
+                          <ChevronUp className="w-4 h-4" />
+                          Show Less
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown className="w-4 h-4" />
+                          Technical Details
+                        </>
+                      )}
+                    </Button>
+                  </div>
+
+                  <ActionButtons project={project} />
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>

@@ -5,26 +5,21 @@ import { Download, Linkedin, Mail, ChevronDown, Briefcase, Code2, Cpu, Zap } fro
 import { Button } from "@/components/ui/button"
 
 const stats = [
-  {
-    icon: Briefcase,
-    value: "2+",
-    label: "Years Industry Experience",
-  },
-  {
-    icon: Code2,
-    value: "10+",
-    label: "Embedded Projects",
-  },
-  {
-    icon: Cpu,
-    value: "FPGA",
-    label: "& Embedded Systems",
-  },
-  {
-    icon: Zap,
-    value: "Embedded AI",
-    label: "& Robotics",
-  },
+  { icon: Briefcase, value: "2+", label: "Years Industry Experience" },
+  { icon: Code2, value: "10+", label: "Embedded Projects" },
+  { icon: Cpu, value: "FPGA", label: "& Embedded Systems" },
+  { icon: Zap, value: "Embedded AI", label: "& Robotics" },
+]
+
+// Silicon die-grid lines (clipped to the wafer circle)
+const gridLines = Array.from({ length: 13 }, (_, i) => 80 + i * 70)
+// Highlighted dies on the wafer - iridescent: violet / cyan / magenta
+const litDies: [number, number, string][] = [
+  [430, 360, "#A78BFA"],
+  [570, 500, "#34E0E8"],
+  [360, 570, "#F472B6"],
+  [640, 430, "#A78BFA"],
+  [500, 290, "#34E0E8"],
 ]
 
 export function HeroSection() {
@@ -40,96 +35,89 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden circuit-bg">
-      {/* Animated circuit lines background - subtle */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        <svg className="absolute w-full h-full opacity-15" viewBox="0 0 1000 1000">
+      {/* Iridescent silicon wafer background - subtle */}
+      <div className="absolute inset-0 overflow-hidden opacity-25">
+        <svg
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] opacity-30"
+          viewBox="0 0 1000 1000"
+        >
           <defs>
-            <linearGradient id="circuit-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#14B8A6" />
-              <stop offset="100%" stopColor="#A63A5B" />
+            <linearGradient id="wafer-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#A78BFA" />
+              <stop offset="55%" stopColor="#34E0E8" />
+              <stop offset="100%" stopColor="#F472B6" />
             </linearGradient>
+            <clipPath id="wafer-clip">
+              <circle cx="500" cy="500" r="430" />
+            </clipPath>
           </defs>
-          {/* Horizontal lines */}
-          <motion.path
-            d="M0,200 H300 L350,250 H600 L650,200 H1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M0,400 H200 L250,350 H450 L500,400 H700 L750,450 H1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 0.5, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M0,600 H150 L200,650 H400 L450,600 H650 L700,550 H1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 1, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M0,800 H400 L450,750 H550 L600,800 H1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 1.5, ease: "easeInOut" }}
-          />
-          {/* Vertical lines */}
-          <motion.path
-            d="M200,0 V300 L250,350 V700 L200,750 V1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 0.3, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M500,0 V200 L550,250 V500 L500,550 V1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 0.8, ease: "easeInOut" }}
-          />
-          <motion.path
-            d="M800,0 V400 L750,450 V600 L800,650 V1000"
-            stroke="url(#circuit-gradient)"
-            strokeWidth="1"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 1.3, ease: "easeInOut" }}
-          />
-          {/* Circuit nodes */}
-          {[
-            [200, 200], [350, 250], [500, 400], [650, 200], [750, 450],
-            [200, 350], [450, 350], [700, 550], [200, 750], [600, 800]
-          ].map(([cx, cy], i) => (
-            <motion.circle
+
+          {/* Die grid, clipped to the wafer */}
+          <g clipPath="url(#wafer-clip)" stroke="#A78BFA" strokeWidth="1" opacity="0.16">
+            {gridLines.map((x) => (
+              <line key={`v-${x}`} x1={x} y1="70" x2={x} y2="930" />
+            ))}
+            {gridLines.map((y) => (
+              <line key={`h-${y}`} x1="70" y1={y} x2="930" y2={y} />
+            ))}
+          </g>
+
+          {/* Highlighted dies */}
+          {litDies.map(([x, y, color], i) => (
+            <motion.rect
               key={i}
-              cx={cx}
-              cy={cy}
-              r="4"
-              fill="#14B8A6"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.3 }}
-              transition={{ duration: 0.5, delay: 2 + i * 0.1 }}
+              x={x}
+              y={y}
+              width="56"
+              height="56"
+              rx="4"
+              fill={color}
+              clipPath="url(#wafer-clip)"
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 0.32, scale: 1 }}
+              transition={{ duration: 0.6, delay: 2 + i * 0.12 }}
+              style={{ transformOrigin: `${x + 28}px ${y + 28}px` }}
             />
           ))}
+
+          {/* Wafer outer edge */}
+          <motion.circle
+            cx="500"
+            cy="500"
+            r="430"
+            fill="none"
+            stroke="url(#wafer-gradient)"
+            strokeWidth="2"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.7 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+          />
+          {/* Inner ring */}
+          <motion.circle
+            cx="500"
+            cy="500"
+            r="392"
+            fill="none"
+            stroke="#34E0E8"
+            strokeWidth="1"
+            opacity="0.3"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, delay: 0.4, ease: "easeInOut" }}
+          />
+          {/* Wafer flat (the notch edge of a real wafer) */}
+          <motion.line
+            x1="372"
+            y1="905"
+            x2="628"
+            y2="905"
+            stroke="#F472B6"
+            strokeWidth="2"
+            opacity="0.5"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, delay: 1.5 }}
+          />
         </svg>
       </div>
 
@@ -147,7 +135,6 @@ export function HeroSection() {
             className="space-y-8"
           >
             <div className="space-y-4">
-              {/* Availability Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -169,7 +156,7 @@ export function HeroSection() {
               >
                 Embedded Systems Engineer
               </motion.p>
-              
+
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -180,7 +167,7 @@ export function HeroSection() {
                 <br />
                 <span className="gradient-text">Bhardwaj</span>
               </motion.h1>
-              
+
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -223,12 +210,7 @@ export function HeroSection() {
                   LinkedIn
                 </a>
               </Button>
-              <Button 
-                size="lg" 
-                variant="ghost" 
-                className="gap-2"
-                onClick={() => handleScrollToSection("contact")}
-              >
+              <Button size="lg" variant="ghost" className="gap-2" onClick={() => handleScrollToSection("contact")}>
                 <Mail className="w-4 h-4" />
                 Contact Me
               </Button>
@@ -243,40 +225,25 @@ export function HeroSection() {
             className="relative flex justify-center lg:justify-end"
           >
             <div className="relative">
-              {/* Outer glow ring - reduced intensity */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/8 to-accent/12 blur-2xl scale-110" />
-              
-              {/* Decorative ring - teal primary, burgundy secondary */}
+
+              {/* Decorative ring - violet primary, cyan secondary */}
               <svg className="absolute -inset-6 w-[calc(100%+48px)] h-[calc(100%+48px)]" viewBox="0 0 400 400">
                 <motion.circle
-                  cx="200"
-                  cy="200"
-                  r="180"
-                  fill="none"
-                  stroke="#14B8A6"
-                  strokeWidth="1.5"
-                  strokeDasharray="20 10"
-                  opacity="0.5"
-                  initial={{ rotate: 0 }}
-                  animate={{ rotate: 360 }}
+                  cx="200" cy="200" r="180" fill="none" stroke="#A78BFA" strokeWidth="1.5"
+                  strokeDasharray="20 10" opacity="0.5"
+                  initial={{ rotate: 0 }} animate={{ rotate: 360 }}
                   transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 />
                 <motion.circle
-                  cx="200"
-                  cy="200"
-                  r="160"
-                  fill="none"
-                  stroke="#A63A5B"
-                  strokeWidth="1"
-                  strokeDasharray="10 20"
-                  opacity="0.3"
-                  initial={{ rotate: 360 }}
-                  animate={{ rotate: 0 }}
+                  cx="200" cy="200" r="160" fill="none" stroke="#34E0E8" strokeWidth="1"
+                  strokeDasharray="10 20" opacity="0.3"
+                  initial={{ rotate: 360 }} animate={{ rotate: 0 }}
                   transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
                 />
               </svg>
 
-              {/* Avatar container - subtle burgundy ring */}
+              {/* Avatar container - subtle accent ring */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-accent/30 glow-accent">
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Mansi%20Bhardwaj-AGfOnKZymYWmmvZfKQMjDaSQPfpxBX.jpg"
