@@ -155,6 +155,40 @@ const projects: Project[] = [
     coauthorLink: "/projects/parkinson/coauthor-certificate.pdf",
     coauthorLabel: "View Co-author Certificate",
   },
+  {
+    title: "Automatic Pet Feeder",
+    date: "2022",
+    association: "VIT Chennai · AIP Conference Proceedings",
+    image: "/projects/pet-feeder/circuit-schematic.png",
+    description:
+      "Published IoT-based automatic pet feeder that dispenses accurate, scheduled food portions with pet-presence detection and remote monitoring.",
+    fullDescription:
+      "An IoT-based automated pet feeding system built around a NodeMCU and the Arduino IoT Cloud. A PIR sensor detects the pet's presence, an ultrasonic sensor measures the dispensed food level to control portion size, servo motors drive the dispensing mechanism, and a buzzer signals feeding. The Arduino IoT Cloud dashboard enables remote scheduling, a manual reward button, and real-time monitoring, delivering accurate and consistent feeding even when the owner is away. The work was published in AIP Conference Proceedings.",
+    technologies: [
+      "NodeMCU",
+      "PIR Sensor",
+      "Ultrasonic Sensor",
+      "Servo Motor",
+      "Buzzer",
+      "Arduino IoT Cloud",
+      "IoT",
+      "Embedded C",
+    ],
+    achievement: "Published · AIP Conference Proceedings (DOI: 10.1063/5.0148700)",
+    challenges: [
+      "Integrated NodeMCU (ESP8266) as the main controller with Wi-Fi connectivity to the Arduino IoT Cloud.",
+      "Used a PIR sensor for pet-presence detection and an ultrasonic sensor to measure dispensed food level for accurate portioning.",
+      "Drove servo motors for the food-dispensing mechanism with a buzzer cue to signal feeding.",
+      "Built an Arduino IoT Cloud dashboard for remote scheduling, a manual reward button, and real-time monitoring.",
+    ],
+    results: [
+      "Published research paper in AIP Conference Proceedings (DOI: 10.1063/5.0148700).",
+      "Dispensed accurate, user-defined food portions, addressing the over-feeding and jamming issues seen in existing feeders.",
+      "Enabled remote, scheduled feeding and live monitoring through IoT cloud connectivity.",
+      ],
+    paperLink: "https://doi.org/10.1063/5.0148700",
+    paperLabel: "View Publication",
+  },
 ]
 
 // Iridescent die hues: violet / cyan / magenta
