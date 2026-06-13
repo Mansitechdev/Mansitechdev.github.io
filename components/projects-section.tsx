@@ -229,6 +229,42 @@ const projects: Project[] = [
     reportLink: "/projects/rfid-warehouse/warehouse-poster.pdf",
     reportLabel: "View Poster",
   },
+  {
+    title: "Fisherman Border Alert System & Fish Detection",
+    date: "2022",
+    association: "VIT Chennai · TARP Project",
+    image: "/projects/fisherman-alert/fisherman-radar.png",
+    description:
+      "GPS-based maritime border alert system with sonar-style fish detection, built to warn fishermen before they cross the India–Sri Lanka sea border.",
+    fullDescription:
+      "An Arduino Uno system with two subsystems. A GPS/GNSS module continuously reads latitude and longitude and compares them against the maritime border coordinates; as the boat nears the International Maritime Boundary Line, an LED and buzzer alert the fisherman and a relay cuts the DC motor (engine) to stop further crossing, with the live position logged over serial as a Google Maps link. The second subsystem performs fish detection: a servo sweeps an underwater ultrasonic sensor across a wide arc, measuring distance from echo time (SONAR principle), and a Processing radar display visualises the angle and range of detected objects in real time. Firmware was written in Embedded C using the TinyGPS, SoftwareSerial, and Servo libraries.",
+    technologies: [
+      "Arduino Uno",
+      "GPS / GNSS",
+      "Ultrasonic Sensor",
+      "Servo Motor",
+      "Relay",
+      "Buzzer",
+      "Embedded C",
+      "Processing",
+      "TinyGPS",
+    ],
+    achievement: "GPS Geofencing + Ultrasonic Sonar Sweep",
+    challenges: [
+      "Read live GPS coordinates with a GPS/GNSS module and the TinyGPS library, comparing position against fixed border coordinates.",
+      "Triggered LED and buzzer alerts and cut the boat's DC motor through a relay as it approached the border.",
+      "Swept an ultrasonic sensor across a servo-driven arc to range underwater objects using echo timing (SONAR principle).",
+      "Visualised detected-object angle and distance in real time with a Processing radar display.",
+    ],
+    results: [
+      "Alerted fishermen with buzzer and LED and automatically stopped the engine before crossing the India–Sri Lanka maritime border.",
+      "Logged live latitude and longitude with a Google Maps link over serial for position tracking.",
+      "Detected and ranged nearby underwater objects on a real-time radar sweep.",
+      "Delivered a low-cost embedded aid combining navigation safety and fish-finding in a single Arduino system.",
+    ],
+    reportLink: "/projects/fisherman-alert/fisherman-report.pdf",
+    reportLabel: "View Project Report",
+  },
 ]
 
 // Iridescent die hues: violet / cyan / magenta
