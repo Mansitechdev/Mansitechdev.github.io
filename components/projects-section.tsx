@@ -39,6 +39,43 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "Embedded Systems Lab: FPGA Vision-in-the-Loop Robot Control",
+    date: "2026 – Present",
+    association: "University of Twente · Embedded Systems Laboratory (MSc) · In Progress",
+    image: "/projects/esl-jiwy/jiwy-architecture.png",
+    description:
+      "In-progress lab building a vision-in-the-loop controller for the JIWY pan-tilt robot: hand-written Verilog encoder and PWM modules on a Lattice ICE40 FPGA, an SPI link to a Raspberry Pi, and a camera-driven control loop.",
+    fullDescription:
+      "An ongoing embedded-systems lab on the JIWY 2-axis pan-tilt platform, partitioning a vision-in-the-loop controller across a Raspberry Pi and a Lattice ICE40 FPGA (icoBoard). Completed building blocks: a quadrature-encoder decoder written in Verilog that tracks direction and maintains a position count (verified live by moving the JIWY axis, observing counts up to roughly ±13,000), and a PWM + direction module generating the motor-driver signals (PITCH_PWM_VAL / DIRA / DIRB) at 20 kHz from the 50 MHz clock (50 MHz / 2500), validated at 0/10/50/100% duty with the motor responding correctly. The FPGA flow uses Verilog through yosys synthesis, nextpnr place-and-route, and icepack/IcoProg programming, with iverilog/gtkwave for simulation. An SPI link between the Raspberry Pi (master, in C/C++) and the FPGA (slave) was implemented and verified with a logic analyser (PulseView SPI decoder), and camera frames are acquired on the Pi via a GStreamer pipeline (v4l2src → appsink). The system architecture places timing-critical PWM generation and encoder counting on the FPGA and the computationally heavy image processing and control algorithm on the Raspberry Pi, communicating over SPI: a signed 16-bit encoder position (chosen to cover the measured ±13,000-count range with low overhead) and a 12-bit PWM duty value (0–2500). A polling scheme was chosen over interrupts for implementation simplicity and easier debugging at the expected loop rate. Remaining work: integrating a 20-sim-generated position controller into the closed loop, then tuning, the final vision-in-the-loop demonstrator, and a Design-Space Exploration (e.g. FPGA vs software, integer vs floating point, image quality vs processing cost).",
+    technologies: [
+      "Verilog",
+      "Lattice ICE40",
+      "icoBoard",
+      "Raspberry Pi",
+      "FPGA",
+      "SPI",
+      "PWM",
+      "Quadrature Encoder",
+      "yosys / nextpnr",
+      "GStreamer",
+      "20-sim",
+      "HW/SW Co-Design",
+    ],
+    achievement: null,
+    challenges: [
+      "Wrote a Verilog quadrature-encoder decoder (direction + position counter) and verified counts live on the JIWY axis.",
+      "Built a Verilog PWM + direction module at 20 kHz (50 MHz / 2500), tested across 0–100% duty with correct motor response.",
+      "Implemented and verified an SPI link between a Raspberry Pi master (C/C++) and the FPGA slave using a PulseView logic analyser.",
+      "Designed the HW/SW partitioning and interface: signed 16-bit encoder feedback and 12-bit PWM over SPI, with a polling control scheme.",
+    ],
+    results: [
+      "Encoder, PWM, and SPI building blocks implemented on the ICE40 FPGA and verified individually on real hardware.",
+      "Camera acquisition working on the Raspberry Pi via a GStreamer v4l2src → appsink pipeline.",
+      "Defined a justified architecture and bit-width/communication strategy for the closed-loop controller.",
+      "In progress: 20-sim controller integration and tuning, final vision-in-the-loop demo, and Design-Space Exploration.",
+    ],
+  },
+  {
     title: "Wearable Ergonomic Risk Awareness System",
     date: "Feb 2026 – Apr 2026",
     association: "University of Twente",
