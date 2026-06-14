@@ -154,6 +154,43 @@ const projects: Project[] = [
     reportLabel: "View Presentation",
   },
   {
+    title: "System-on-Chip Design: RTL-to-Co-Design Flow",
+    date: "Sep 2025 – Jan 2026",
+    association: "University of Twente · System-on-Chip Design (MSc)",
+    image: "/projects/soc-design/soc-design-flow.png",
+    description:
+      "Completed a full front-end ASIC design flow in VHDL — RTL coding, logic synthesis, datapath/controller design, design-for-test, verification, low-power optimization, and HW/SW co-design on a NIOS II soft processor.",
+    fullDescription:
+      "A master-level System-on-Chip design course worked through seven connected sub-projects on a shared family of SISO / GCD / ALU / IIR designs, spanning the complete digital front-end flow. RTL design and simulation: wrote FSM-based serial-input adder architectures in VHDL (IDLE/ADD control, registered datapath) and verified their behaviour in ModelSim. Logic synthesis: reduced a GCD design's area through arithmetic resource sharing — comparing the operands and reusing a single subtractor instead of duplicating it — then validated the netlist by comparing pre-synthesis RTL simulation against post-synthesis gate-level simulation with SDF back-annotated timing. Datapath design: built the GCD datapath together with its controller. Design-for-test: inserted a scan chain (length 35) and generated test patterns for stuck-at faults, tracing fault propagation through the chain to the scan output. Verification: replaced a file-logging testbench with a self-checking, instruction-driven verification component that knows each expected result and reports PASS/FAIL directly, handling two's-complement 8- and 16-bit wraparound, multi-byte multiply results, and 25 corner-case vectors. Low-power design: cut average power by roughly 25% (2.02 → 1.51 mW) using clock gating, operand isolation, and clock-enabled result registers, accepting a small area overhead for the same timing and functionality. Hardware-software co-design: implemented a second-order IIR filter on a NIOS II processor, first optimizing it in software (-O0 vs -O3, ~2.4× fewer cycles), then accelerating it with a custom co-processor containing a fixed-point 2.8 hardware multiplier exposed through memory-mapped registers, verified correct against the software reference at RTL.",
+    technologies: [
+      "VHDL",
+      "ModelSim",
+      "Logic Synthesis",
+      "SDF Timing",
+      "NIOS II",
+      "HW/SW Co-Design",
+      "Scan Chain / DFT",
+      "Self-Checking Testbench",
+      "Clock Gating",
+      "Low-Power Design",
+      "Fixed-Point Arithmetic",
+    ],
+    achievement: "Full ASIC front-end flow · ~25% power reduction · 2.4× IIR speedup",
+    challenges: [
+      "Designed FSM-based RTL in VHDL and verified behaviour against testbenches in ModelSim.",
+      "Synthesized a GCD design with arithmetic resource sharing and validated it via post-synthesis gate-level simulation with SDF timing.",
+      "Applied design-for-test with scan-chain insertion (length 35) and stuck-at fault test-pattern generation.",
+      "Built a self-checking, instruction-driven verification component handling two's-complement wrap and multi-byte multiply results.",
+      "Co-designed a NIOS II system: a custom co-processor with a fixed-point hardware multiplier offloading the IIR filter's multiplications via memory-mapped registers.",
+    ],
+    results: [
+      "Delivered a complete front-end flow from RTL through synthesis, DFT, verification, power, and HW/SW co-design.",
+      "Cut average power ~25% (2.02 → 1.51 mW) with clock gating and operand isolation at a small area cost.",
+      "Reduced IIR-filter execution ~2.4× (e.g. 1,725,820 → 715,780 cycles) with -O3 compiler optimization on NIOS II.",
+      "Offloaded multiplication to a custom hardware co-processor, verified correct against the software reference at RTL.",
+    ],
+  },
+  {
     title: "Wearable Parkinson's Disease Detection System",
     date: "Dec 2021",
     association: "VIT Chennai",
