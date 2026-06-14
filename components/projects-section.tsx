@@ -229,6 +229,42 @@ const projects: Project[] = [
     ],
   },
   {
+    title: "Advanced Software Development for Robotics (ROS2)",
+    date: "Sep 2025 – Jan 2026",
+    association: "University of Twente · Advanced Software Development for Robotics (MSc)",
+    image: "/projects/asdfr/object-detection.png",
+    description:
+      "Built a real-time ROS2 robotics software stack: modular image-processing nodes, a Xenomai real-time control loop, and a vision-driven sequence controller deployed on a Raspberry Pi to drive the RELbot.",
+    fullDescription:
+      "A master-level robotics software-engineering course developing the full software path from perception to real-time actuation on real hardware. ROS2 node architecture: designed loosely-coupled, single-responsibility nodes communicating over typed topics — a cam2image node streaming a webcam over UDP into WSL and publishing sensor_msgs/Image, a brightness detector publishing a boolean on /light_on, and an object-position detector publishing pixel coordinates as geometry_msgs/Point at ~30 FPS — and reasoned about Quality-of-Service settings (history/depth) and parameters for low-latency, real-time-appropriate behaviour. Real-time timing: implemented a 1 ms periodic loop and analysed jitter with time-series and histogram views, using clock_nanosleep with absolute wake-up times to avoid drift and CLOCK_MONOTONIC for stable timing; under CPU load the standard-Linux loop's jitter grew (std 0.13 → 0.60 ms), so the loop was re-implemented on the Xenomai real-time framework, which held the 1 ms period almost flat even under stress load — demonstrating isolation from the Linux scheduler. Embedded deployment: ran the complete vision-to-motion pipeline (camera → object detection → sequence controller → RELbot simulator) headless on a Raspberry Pi, handling the upside-down RELbot camera with image rotation, visualising remotely over X11 forwarding, and profiling the platform (~75% single-core CPU, load ~3.3) to characterise its real-time margins.",
+    technologies: [
+      "ROS2",
+      "Xenomai",
+      "Real-Time Systems",
+      "Raspberry Pi",
+      "RELbot",
+      "C++",
+      "Python",
+      "QoS / Topics",
+      "Computer Vision",
+      "Closed-Loop Control",
+      "Linux / WSL",
+    ],
+    achievement: "Real-time ROS2 vision-to-motion stack on Raspberry Pi",
+    challenges: [
+      "Designed modular ROS2 nodes (cam2image, brightness, object-position) with typed topics, QoS tuning, and parameters for low-latency streaming.",
+      "Implemented a drift-free 1 ms periodic loop with clock_nanosleep absolute wake-ups and analysed jitter via time-series and histograms.",
+      "Re-implemented the loop on Xenomai to hold real-time timing under CPU load where standard Linux scheduling degraded.",
+      "Deployed the full vision-to-motion pipeline headless on a Raspberry Pi driving the RELbot simulator, handling camera rotation and remote visualisation.",
+    ],
+    results: [
+      "Delivered a loosely-coupled ROS2 perception graph detecting a coloured object and publishing its position at ~30 FPS.",
+      "Showed Xenomai keeps the 1 ms loop near-flat under load while standard-Linux jitter rose from 0.13 to 0.60 ms std.",
+      "Ran the complete camera→detection→controller→RELbot pipeline reliably on a Raspberry Pi at ~75% CPU.",
+      "Identified portability improvements (camera abstraction, parameterised orientation/visualisation) for hardware-independent deployment.",
+    ],
+  },
+  {
     title: "Wearable Parkinson's Disease Detection System",
     date: "Dec 2021",
     association: "VIT Chennai",
